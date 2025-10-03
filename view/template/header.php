@@ -1,5 +1,5 @@
- <?php
-// header.php
+<?php
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,21 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JABYD Minimarket</title>
     
-    <!-- Descripción y SEO -->
     <meta name="description" content="JABYD Minimarket: Tu tienda de confianza con productos frescos, ofertas y todo lo que necesitas para tu hogar.">
     <meta name="keywords" content="jabyd, minimarket, supermercado, compras, ofertas, productos, hogar, alimentos">
     <meta name="author" content="JABYD Minimarket">
 
-    <!-- Favicon -->
     <link rel="icon" href="assets/favicon.png" type="image/png">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Archivo de estilos externo -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,7 +40,14 @@
             <!-- Acciones usuario -->
             <div class="user-actions">
                 <a href="carrito.php"><i class="fas fa-shopping-cart"></i> Carrito</a>
-                <a href="login.php"><i class="fas fa-user"></i> Ingresar</a>
+
+                <?php if(isset($_SESSION['usuario_nombre'])): ?>
+                    <span>Hola, <?= htmlspecialchars($_SESSION['usuario_nombre']) ?></span>
+                    <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                <?php else: ?>
+                    <a href="login.php"><i class="fas fa-user"></i> Ingresar</a>
+                <?php endif; ?>
+
                 <a href="ayuda.php"><i class="fas fa-circle-question"></i> Ayuda</a>
             </div>
         </div>

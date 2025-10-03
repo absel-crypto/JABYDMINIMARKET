@@ -130,4 +130,14 @@ include 'header.php'; // Incluye el header
 </main>
 
 <?php
+include 'ProductoController.php';
+$productoController = new ProductoController($conexion);
+$productos = $productoController->obtenerTodos();
+
+foreach($productos as $p): ?>
+    <a href="editar_producto.php?id=<?= $p['id'] ?>">Editar</a> |
+    <a href="eliminar_producto.php?id=<?= $p['id'] ?>" onclick="return confirm('¿Eliminar este producto?')">Eliminar</a>
+<?php endforeach; ?>
+
+<?php
 include 'footer.php'; // Incluye el footer
