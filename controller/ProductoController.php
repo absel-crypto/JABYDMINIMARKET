@@ -40,3 +40,23 @@ class ProductoController {
     }
 }
 ?>
+
+<?php
+include 'conexion.php';
+include 'ProductoController.php';
+
+$productoController = new ProductoController($conexion);
+
+// Datos del nuevo producto
+$nombre = "Banano";
+$categoria = "Frutas y Verduras";
+$precio = 3200;
+$imagen = "assets/frutas/banano.jpg";
+
+// Insertar producto
+if ($productoController->guardarProducto($nombre, $categoria, $precio, $imagen)) {
+    echo "Producto agregado correctamente.";
+} else {
+    echo "Error al agregar el producto.";
+}
+?>

@@ -50,5 +50,17 @@ class ProductoModel {
         $stmt->close();
         return $producto;
     }
+
+    // ======================================================
+    // NUEVA FUNCIÓN: Insertar un nuevo producto
+    // ======================================================
+    public function insertarProducto($nombre, $categoria, $precio, $imagen) {
+        $stmt = $this->conexion->prepare("INSERT INTO productos (nombre, categoria, precio, imagen) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssds", $nombre, $categoria, $precio, $imagen);
+        $resultado = $stmt->execute();
+        $stmt->close();
+
+        return $resultado; // Devuelve true si se insertó correctamente
+    }
 }
 ?>

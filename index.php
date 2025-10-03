@@ -22,6 +22,26 @@ if (isset($_GET['page'])) {
     }
 }
 
+<?php
+$default_page = 'home';
+$page = $default_page;
+
+$allowed_pages = ['home', 'productos', 'contactos', 'ofertas', 'categorias', 'nuevo_producto', '404'];
+
+if (isset($_GET['page'])) {
+    $requested_page = basename($_GET['page']);
+    if (in_array($requested_page, $allowed_pages) && file_exists($requested_page . '.php')) {
+        $page = $requested_page;
+    } else {
+        $page = $default_page;
+    }
+}
+
+include 'header.php';
+include $page . '.php';
+include 'footer.php';
+?>
+
 // ===== Cargar la vista =====
 
 // Incluir header
