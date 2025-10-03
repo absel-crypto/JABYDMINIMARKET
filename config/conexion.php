@@ -1,4 +1,5 @@
 <?php
+// conexion.php
 // Conexión a la base de datos JABYD Minimarket
 
 $host = "localhost";          // Servidor MySQL
@@ -11,7 +12,7 @@ $conexion = new mysqli($host, $usuario, $password, $base_datos);
 
 // Verificar si la conexión fue exitosa
 if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+    die("Error de conexión a la base de datos: " . $conexion->connect_error);
 }
 
 // Configurar caracteres UTF-8 para evitar problemas con acentos
@@ -23,4 +24,3 @@ function cerrarConexion($conexion) {
         $conexion->close();
     }
 }
-?>

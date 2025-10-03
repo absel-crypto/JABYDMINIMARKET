@@ -1,5 +1,12 @@
 <?php
 session_start();
+require_once 'conexion.php';
+require_once 'CarritoController.php';
+
+// Inicializar controlador del carrito
+$carritoController = new CarritoController($conexion);
+$carrito = $carritoController->obtenerCarrito();
+$totalItemsCarrito = array_sum(array_column($carrito, 'cantidad'));
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,16 +46,21 @@ session_start();
 
             <!-- Acciones usuario -->
             <div class="user-actions">
-                <a href="carrito.php"><i class="fas fa-shopping-cart"></i> Carrito</a>
+                <a href="index.php?page=carrito">
+                    <i class="fas fa-shopping-cart"></i> Carrito
+                    <?php if($totalItemsCarrito > 0): ?>
+                        <span class="carrito-count"><?= $totalItemsCarrito ?></span>
+                    <?php endif; ?>
+                </a>
 
                 <?php if(isset($_SESSION['usuario_nombre'])): ?>
                     <span>Hola, <?= htmlspecialchars($_SESSION['usuario_nombre']) ?></span>
-                    <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                    <a href="index.php?page=logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
                 <?php else: ?>
-                    <a href="login.php"><i class="fas fa-user"></i> Ingresar</a>
+                    <a href="index.php?page=login"><i class="fas fa-user"></i> Ingresar</a>
                 <?php endif; ?>
 
-                <a href="ayuda.php"><i class="fas fa-circle-question"></i> Ayuda</a>
+                <a href="index.php?page=ayuda"><i class="fas fa-circle-question"></i> Ayuda</a>
             </div>
         </div>
 
@@ -56,10 +68,10 @@ session_start();
         <nav class="main-nav">
             <ul>
                 <li><a href="index.php">Inicio</a></li>
-                <li><a href="productos.php">Productos</a></li>
-                <li><a href="ofertas.php">Ofertas</a></li>
-                <li><a href="categorias.php">Categorías</a></li>
-                <li><a href="contacto.php">Contacto</a></li>
+                <li><a href="index.php?page=productos">Productos</a></li>
+                <li><a href="index.php?page=ofertas">Ofertas</a></li>
+                <li><a href="index.php?page=categorias">Categorías</a></li>
+                <li><a href="index.php?page=contactos">Contacto</a></li>
             </ul>
         </nav>
     </header>
